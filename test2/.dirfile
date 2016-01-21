@@ -1,0 +1,5 @@
+<!DOCTYPE html PUBLIC -//W3C//DTD HTML 3.2 Final//EN><html><title>Directory listing for /home/sanket/workspace/webserver/test2/.dirfile</title><body><h2>Directory listing for /test2/</h2><hr><ul>
+<li><a href="/"/>[Go Back]</a>
+reqpath: /test2/ :: GET /test2 HTTP/1.1 
+<li><a href="/test2/UntitledDocument"/>UntitledDocument</a>
+</ul><hr></body></html>

@@ -4,7 +4,7 @@
 printfile(){
 	size=`cat $1 | wc -c`
 	echo -e "HTTP/1.1 200 OK\r\nContent-Length: $(( $size ))\r\nContent-Type: text/html\r\n\r"
-	cat $1
+	less $1
 }
 
 	requestPath=`echo $1 | awk '/GET/ {print $2}'` # get the request path
