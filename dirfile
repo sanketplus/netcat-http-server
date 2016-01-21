@@ -1,3 +1,13 @@
 <!DOCTYPE html PUBLIC -//W3C//DTD HTML 3.2 Final//EN><html><title>Directory listing for /home/sanket/workspace/webserver/dirfile</title><body><h2>Directory listing for /home/sanket/workspace/webserver/dirfile</h2><hr><ul>
+<li><a href="404.txt"/>404.txt</a>
+<li><a href="file"/>file</a>
+<li><a href="another.sh"/>another.sh</a>
 <li><a href="contents.txt"/>contents.txt</a>
+<li><a href="dirfile"/>dirfile</a>
+<li><a href="filepath.txt"/>filepath.txt</a>
+<li><a href="parser.sh"/>parser.sh</a>
+<li><a href="parser.sh~"/>parser.sh~</a>
+<li><a href="README.md"/>README.md</a>
+<li><a href="test"/>test</a>
+<li><a href="test1"/>test1</a>
 </ul><hr></body></html>
