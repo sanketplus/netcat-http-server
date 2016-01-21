@@ -7,26 +7,37 @@ printfile(){
 	less $1
 }
 
-requestPath=`echo $1 | awk '/GET/ {print $2}'` # get the request path
+	requestPath=`echo $1 | awk '/GET/ {print $2}'` # get the request path
 
 	if [ "$requestPath" == "" ]; then #if the request is not a GET request	
 		:
 	else  # if it is a GET request
 		wd=`pwd`
 		fp="$wd$requestPath" # path for requested file 
-		df="${wd}${requestPath}dirfile"   # path for dir listing page
+		
 			
 			if [ -d "$fp" ]; then # if requested path is directory 
-				`>$df` 				
-				dirlist=$(ls -a $fp | awk '{print $NF}')
-				echo "<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><html><title>Directory listing for $df</title><body><h2>Directory listing for $df</h2><hr><ul>" >> $df
+								
+				if [ "${requestPath: -1}" != "/" ]; then
+					requestPath="${requestPath}/"
+					#echo "added / :: $requestPath"
+					:
+				fi
+				df="${wd}${requestPath}.dirfile"   # path for dir listing page
+				`>$df` 	
+				echo "<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><html><title>Directory listing for $df</title><body><h2>Directory listing for $requestPath</h2><hr><ul>" >> $df			
+				dirlist=$(ls $fp | awk '{print $NF}')
+				
+				linkParent=$(echo $requestPath | awk 'BEGIN { FS = "/";ORS="/" } ; { for (i=1; i<NF-1;i++) print $i}')
+				echo "<li><a href=\"$linkParent\"/>[Go Back]</a>" >> $df
+				echo "reqpath: $requestPath :: $1 " >> $df					
 				for i in `echo $dirlist` #writing dir content into a htmlfile
 				do
 					if [ "$i" == "index.html" ]; then # if dir has index.html
 						printfile "$fp/$i"						
 						exit 0
 					fi					
-					echo "<li><a href=\"$requestPath/$i\"/>$i</a>" >> $df
+					echo "<li><a href=\"$requestPath$i\"/>$i</a>" >> $df
 				done
 				echo "</ul><hr></body></html>" >> $df
 				size=`cat $df | wc -c`
