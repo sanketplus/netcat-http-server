@@ -14,11 +14,11 @@ requestPath=`echo $1 | awk '/GET/ {print $2}'` # get the request path
 	else  # if it is a GET request
 		wd=`pwd`
 		fp="$wd$requestPath" # path for requested file 
-		df="${wd}/dirfile"   # path for dir listing page
+		df="${wd}${requestPath}dirfile"   # path for dir listing page
 			
 			if [ -d "$fp" ]; then # if requested path is directory 
 				`>$df` 				
-				dirlist=$(ls  $fp | awk '{print $NF}')
+				dirlist=$(ls -a $fp | awk '{print $NF}')
 				echo "<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><html><title>Directory listing for $df</title><body><h2>Directory listing for $df</h2><hr><ul>" >> $df
 				for i in `echo $dirlist` #writing dir content into a htmlfile
 				do
@@ -26,7 +26,7 @@ requestPath=`echo $1 | awk '/GET/ {print $2}'` # get the request path
 						printfile "$fp/$i"						
 						exit 0
 					fi					
-					echo "<li><a href=\"$i\"/>$i</a>" >> $df
+					echo "<li><a href=\"$requestPath/$i\"/>$i</a>" >> $df
 				done
 				echo "</ul><hr></body></html>" >> $df
 				size=`cat $df | wc -c`
