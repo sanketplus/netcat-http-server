@@ -1,0 +1,19 @@
+#!/bin/bash
+#while true;
+#do
+	echo $(date)	
+	
+	requestPath=`awk '/GET/ {print $2}' req`
+	echo $requestPath
+	
+	wd=`pwd`
+	echo "$wd/$requestPath" > filepath.txt
+	
+		if [ -f "$requestPath" ]; then
+			echo -e "HTTP/1.1 200 OK\r\nContent-Length: 42\r\nContent-Type: text/html\r\n\r\n<h1>HELLO</h1>"
+		else
+			echo -e "HTTP/1.1 404 Not Found\r\nContent-Length:22\r\nContent-Type: text/html\r\n\r\n<h1>404 Not Found</h1>"
+		fi
+
+#done
+#echo $(cat 404.txt)
